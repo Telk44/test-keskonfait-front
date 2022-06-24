@@ -1,0 +1,15 @@
+.navbar {
+    display: flex;
+    justify-content: space-between;
+}
+
+.navbarLogo {
+    width:10rem;
+    max-width: 100%;
+}
+.navbarUser {
+    width:1rem;
+}
+.activeLink {
+    border-top: 3px solid darkgreen;
+}
