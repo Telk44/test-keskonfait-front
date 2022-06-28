@@ -1,7 +1,8 @@
 import React from "react";
 import{ useForm} from "react-hook-form";
+import {Link, useNavigate} from "react-router-dom";
 
-import {Link, NavLink} from "react-router-dom";
+
 
 // import {useState} from "react";
 //
@@ -9,6 +10,8 @@ import {Link, NavLink} from "react-router-dom";
 
 export default function Signup() {
     const {handleSubmit, register, formState : {errors}} = useForm()
+
+    const navigate = useNavigate()
 
 
     function onSubmit (formData) {
@@ -20,28 +23,40 @@ export default function Signup() {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(formData)
         };
-        fetch('http://localhost:8080/auth/signup', requestOptions)
+        // const url = 'https://jsonplaceholder.typicode.com/posts/1'
+        const url = 'http://localhost:8080/auth/signup'
+
+        fetch(url, requestOptions)
             .then(response => response.json())
-            .then(() => {
-             console.log('user créé')
-            })
-            .then((res) => {
-                localStorage.setItem("userId", res.userId);
-                localStorage.setItem("token", res.token);
-                console.log(localStorage)
+            .then( json => {
+                console.log(json)
+                navigate('/login')
+
             })
             .catch(error => console.log(error))
+        // const connection = fetch('http://localhost:8080/auth/signup', requestOptions)
+        //     .then(response => {
+        //         console.log(response)
+        //            return  response.json()
+        //         }
+        //     )
+        //     .then(() => {
+        //         console.log('user créé')
+        //         // navigate('/login')
+        //
+        //     })
+        //     .catch(error => console.log(error))
+        // console.log(connection)
     }
-
     return (
         <div>
             <div>
-                <p>Vous avez déjà un compte ? <NavLink to="/login">Connectez-vous</NavLink></p>
+                <p>Vous avez déjà un compte ? <Link to="/login">Connectez-vous</Link></p>
             </div>
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div className="form-group">
                     <label> Nom </label>
-                    <input  type="text" id="lastName" autoComplete='none' {...register("lastName")} />
+                    <input  type="text" id="lastName" autoComplete='none' {...register("lastName")}/>
                 </div>
                 <div className="form-group">
                     <label> Prénom</label>
@@ -63,7 +78,6 @@ export default function Signup() {
                 </div>
                 <button type="submit">S'inscrire</button>
             </form>
-
         </div>
     )
 }
