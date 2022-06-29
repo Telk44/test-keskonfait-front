@@ -1,36 +1,28 @@
 import React from "react";
-import{ useForm} from "react-hook-form";
+import {useForm} from "react-hook-form";
 import {Link, useNavigate} from "react-router-dom";
 
 
-
-// import {useState} from "react";
-//
-// import {useEffect} from "react";
-
 export default function Signup() {
-    const {handleSubmit, register, formState : {errors}} = useForm()
+    const {handleSubmit, register, formState: {errors}} = useForm()
 
     const navigate = useNavigate()
 
-
-    function onSubmit (formData) {
-
+    function onSubmit(formData) {
 
         console.log(formData)
         const requestOptions = {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(formData)
         };
         const url = 'http://localhost:8080/auth/signup'
 
         fetch(url, requestOptions)
             .then(response => response.json())
-            .then( json => {
+            .then(json => {
                 console.log(json)
                 navigate('/login')
-
             })
             .catch(error => console.log(error))
         // const connection = fetch('http://localhost:8080/auth/signup', requestOptions)
@@ -47,6 +39,7 @@ export default function Signup() {
         //     .catch(error => console.log(error))
         // console.log(connection)
     }
+
     return (
         <div>
             <div>
@@ -55,25 +48,29 @@ export default function Signup() {
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div className="form-group">
                     <label> Nom </label>
-                    <input  type="text" id="lastName" autoComplete='none' {...register("lastName")}/>
+                    <input type="text" id="lastName" autoComplete='none' {...register("lastName")}/>
                 </div>
                 <div className="form-group">
                     <label> Prénom</label>
-                    <input  type="text" id="firstName" autoComplete='none' {...register("firstName")}/>
+                    <input type="text" id="firstName" autoComplete='none' {...register("firstName")}/>
                 </div>
                 <div className="form-group">
                     <label> Pseudo</label>
-                    <input  type="text" id="userName" autoComplete='none' {...register("userName", {required : true, minLength : 3})}/>
-                    {errors.userName && <p> Le pseudo est obligatoire et doit contenir au moins 3 lettres</p> }
+                    <input type="text" id="userName" autoComplete='none' {...register("userName", {
+                        required: true,
+                        minLength: 3
+                    })}/>
+                    {errors.userName && <p> Le pseudo est obligatoire et doit contenir au moins 3 lettres</p>}
                 </div>
                 <div className="form-group">
                     <label> Email</label>
-                    <input  type="email" id="email" autoComplete='none' {...register("email", {required : true}) }/>
+                    <input type="email" id="email" autoComplete='none' {...register("email", {required: true})}/>
                 </div>
                 <div className="form-group">
                     <label> Mot de passe</label>
-                    <input type="password" id="password" autoComplete='none' {...register("password",{required : true, })}/>
-                    {errors.password && <p> N'oubliez pas votre mot de passe</p> }
+                    <input type="password" id="password"
+                           autoComplete='none' {...register("password", {required: true,})}/>
+                    {errors.password && <p> N'oubliez pas votre mot de passe</p>}
                 </div>
                 <button type="submit">S'inscrire</button>
             </form>

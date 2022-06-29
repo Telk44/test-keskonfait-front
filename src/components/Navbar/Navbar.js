@@ -1,17 +1,18 @@
-import React from 'react'
-import './Navbar.css'
-import {Link, NavLink} from "react-router-dom";
-import logo from "../../assets/logo.png";
-import user from "../../assets/user.png"
+import React, {useContext} from 'react'
+import {AuthContext} from "../../contexts/Auth";
+import NavbarConnected from "./NavbarConnected";
+import NavbarDisconnected from "./NavbarDisconnected";
+
 
 export default function Navbar() {
+
+    const {auth} = useContext(AuthContext)
+    console.log(auth)
+
+
     return (
-        <div className="navbar">
-            <Link to="/home"><img className="navbarLogo" src={logo} alt="Logo" width="100px"/></Link>
-            <nav>
-                <NavLink to="/activities" className={({isActive}) => isActive ? "activeLink" : ""}>Activités</NavLink>
-                <NavLink to="/login"  className={({isActive}) => isActive ? "activeLink" : ""}><img className="navbarUser" src={user} alt="" width="50px"/>Se connecter</NavLink>
-            </nav>
+        <div>
+            { auth ? <NavbarConnected /> : <NavbarDisconnected /> }
         </div>
     )
 }

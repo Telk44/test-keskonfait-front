@@ -1,8 +1,7 @@
 import React from "react";
 import{ useForm} from "react-hook-form";
-
-
 import {Link, useNavigate} from "react-router-dom";
+
 
 export default function Login() {
     const {handleSubmit, register, formState : {errors}} = useForm()
@@ -28,10 +27,8 @@ export default function Login() {
                     alert("mot de passe incorrect")
                 }
             })
-            .catch(error => console.log(error))
-
-
-    }
+            .catch(error => console.error(error))
+      }
 
     return (
         <div>
@@ -48,7 +45,7 @@ export default function Login() {
                     <input type="password" id="password" autoComplete='none' {...register("password",{required : true, })}/>
                     {errors.password && <p> N'oubliez pas votre mot de passe</p> }
                 </div>
-                <button type="submit">Se connecter</button>
+                <button type="submit" >Se connecter</button>
             </form>
 
         </div>

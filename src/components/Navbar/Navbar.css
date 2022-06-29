@@ -1,15 +1,22 @@
 .navbar {
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 
 .navbarLogo {
-    width:10rem;
+    width: 10rem;
     max-width: 100%;
 }
+
 .navbarUser {
-    width:1rem;
+    width: 1rem;
 }
+
+.navbarUserCheck {
+    width: 1.5rem;
+}
+
 .activeLink {
-    border-top: 3px solid darkgreen;
+    color: darkgreen;
 }
