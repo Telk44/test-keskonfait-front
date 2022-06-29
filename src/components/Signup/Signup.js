@@ -23,7 +23,6 @@ export default function Signup() {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(formData)
         };
-        // const url = 'https://jsonplaceholder.typicode.com/posts/1'
         const url = 'http://localhost:8080/auth/signup'
 
         fetch(url, requestOptions)
