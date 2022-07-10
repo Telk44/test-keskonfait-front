@@ -8,18 +8,16 @@ import Login from "./components/Login/Login"
 import Signup from "./components/Signup/Signup";
 import Profil from "./components/Profil/Profil";
 import Account from "./components/Profil/Account";
-import AuthContextProvider from "./contexts/Auth";
+
 
 function App() {
 
     return (
 
         <div className="App">
-            <AuthContextProvider>
                 <Navbar />
-            </AuthContextProvider>
             <Routes>
-                <Route path="/home" element={<Home />} />
+                <Route path="/" element={<Home />} />
                 <Route path="/activities" element={<Activities />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/signup" element={<Signup />} />
@@ -27,10 +25,7 @@ function App() {
                 <Route path="/account" element={<Account />} />
             </Routes>
         </div>
-
-
     );
-
 
 }
 

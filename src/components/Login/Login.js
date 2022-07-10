@@ -2,8 +2,8 @@ import React from "react";
 import{ useForm} from "react-hook-form";
 import {Link, useNavigate} from "react-router-dom";
 
-
 export default function Login() {
+
     const {handleSubmit, register, formState : {errors}} = useForm()
     const navigate = useNavigate()
 
@@ -14,12 +14,13 @@ export default function Login() {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(formData)
         };
-        fetch('http://localhost:8080/auth/login', requestOptions)
+        fetch('http://localhost:5000/auth/login', requestOptions)
             .then(response => response.json())
             .then (response => {
                 if (response.userId && response.token) {
                     localStorage.setItem("userId", response.userId)
                     localStorage.setItem("token", response.token)
+                    //enregistrer ds le context isAuth est true
                     console.log(localStorage)
                     navigate('/profil')
                 }
